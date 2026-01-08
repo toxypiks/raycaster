@@ -13,7 +13,6 @@ typedef struct RaycastMap {
 } RaycastMap;
 
 RaycastMap *create_raycastmap(int width, int height);
-void fill_raycast_map_with_walls(RaycastMap *map);
 void initialize_map(RaycastMap *map);
 void draw_minimap(RaycastMap *map, int minimap_width, int minimap_height);
 
