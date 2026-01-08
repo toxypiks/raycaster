@@ -1,0 +1,7 @@
+.*~
+\#*\#
+.\#*
+**/build/
+**/video_output/
+**/*~
+README.md~
