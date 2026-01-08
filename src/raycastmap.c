@@ -1,5 +1,4 @@
 #include "raycastmap.h"
-#include "raylib.h"
 
 RaycastMap *create_raycastmap(int width, int height)
 {
@@ -36,26 +35,6 @@ void initialize_map(RaycastMap *map)
     for (int y = 0; y < map->height; y++) {
         for (int x = 0; x < map->width; x++) {
             map->cells[y][x] = tmp[y][x];
-        }
-    }
-}
-
-void draw_minimap(RaycastMap *map, int minimap_width, int minimap_height)
-{
-    float cellsize_x = (float)minimap_width / map->width;
-    float cellsize_y = (float)minimap_height / map->height;
-
-    for (int y = 0; y < map->height; y++) {
-        for (int x = 0; x < map->width; x++) {
-            if (map->cells[y][x] == 1) {
-                DrawRectangle(
-                    x * cellsize_x,
-                    y * cellsize_y,
-                    cellsize_x,
-                    cellsize_y,
-                    DARKGRAY
-                );
-            }
         }
     }
 }

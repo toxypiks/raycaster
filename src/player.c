@@ -1,5 +1,4 @@
 #include "player.h"
-#include "raylib.h"
 
 int is_wall(RaycastMap *map, Player p, float player_radius,
                int screen_width, int screen_height)
@@ -26,15 +25,4 @@ int is_wall(RaycastMap *map, Player p, float player_radius,
         return 1;
 
     return 0;
-}
-
-void draw_player_on_minimap(Player *p, RaycastMap *map, int minimap_width, int minimap_height, int width, int height)
-{
-    float cell_w = (float)minimap_width / map->width;
-    float cell_h = (float)minimap_height / map->height;
-
-    float player_map_x = (p->x / width) * map->width;
-    float player_map_y = (p->y / height) * map->height;
-
-    DrawCircle((int)(player_map_x * cell_w), (int)(player_map_y * cell_h), 5, GREEN);
 }

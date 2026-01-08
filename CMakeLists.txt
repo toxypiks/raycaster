@@ -35,15 +35,6 @@ target_sources(raycastmap
   ${RAYCASTMAP_SOURCES}
   )
 
-target_include_directories(raycastmap
- PRIVATE
-  ${raylib_INCLUDE_DIRS}
-)
-
-target_link_libraries(raycastmap
- ${raylib_LIBRARIES}
-)
-
 set(RAYCASTRAY_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/raycastray.c
   ${CMAKE_CURRENT_SOURCE_DIR}/include/raycastray.h
@@ -88,6 +79,26 @@ target_link_libraries(player
   m
 )
 
+set(DRAWING_FUNCTIONS_SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/drawing_functions.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/drawing_functions.h
+)
+ 
+add_library(drawing_functions)
+target_sources(drawing_functions
+ PRIVATE
+  ${DRAWING_FUNCTIONS_SOURCES}
+  )
+
+target_include_directories(drawing_functions
+ PRIVATE
+  ${raylib_INCLUDE_DIRS}
+)
+
+target_link_libraries(drawing_functions
+ ${raylib_LIBRARIES}
+)
+
 set(RAYCASTER_VIDEO_CAPTURE_SRC
   ${CMAKE_CURRENT_SOURCE_DIR}/src/raycaster_video_capture.c
   )
@@ -101,13 +112,14 @@ target_sources(raycaster_video_capture
 target_include_directories(raycaster_video_capture
  PRIVATE
   ${raylib_INCLUDE_DIRS}
-  )
+)
 
 target_link_libraries(raycaster_video_capture
   ${raylib_LIBRARIES}
     player
     raycastmap
     raycastray
+    drawing_functions
 )
 
 find_package(Doxygen)

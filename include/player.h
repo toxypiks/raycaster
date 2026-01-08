@@ -13,6 +13,5 @@ typedef struct Player {
 } Player;
 
 int is_wall(RaycastMap *map, Player p, float player_radius, int screen_width, int screen_height);
-void draw_player_on_minimap(Player *p, RaycastMap *map, int minimap_width, int minimap_height, int width, int height);
 
 #endif // PLAYER_H_

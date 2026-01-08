@@ -10,6 +10,7 @@
 #include "player.h"
 #include "raycastmap.h"
 #include "raycastray.h"
+#include "drawing_functions.h"
 
 #define READ_END 0
 #define WRITE_END 1
