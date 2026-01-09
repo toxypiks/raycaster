@@ -79,6 +79,26 @@ target_link_libraries(player
   m
 )
 
+set(SCALING_SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/scaling.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/scaling.h
+)
+ 
+add_library(scaling)
+target_sources(scaling
+ PRIVATE
+  ${SCALING_SOURCES}
+  )
+
+target_include_directories(scaling
+ PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(scaling
+ PUBLIC
+)
+
 set(DRAWING_FUNCTIONS_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/drawing_functions.c
   ${CMAKE_CURRENT_SOURCE_DIR}/include/drawing_functions.h
