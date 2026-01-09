@@ -1,19 +1,21 @@
 #include "drawing_functions.h"
+#include "scaling.h"
 #include "raylib.h"
 
 void draw_minimap(RaycastMap *map, int minimap_width, int minimap_height)
 {
-    float cellsize_x = (float)minimap_width / map->width;
-    float cellsize_y = (float)minimap_height / map->height;
+    MinimapTileSize mm;
+    mm.w = (float)minimap_width / map->width;
+    mm.h = (float)minimap_height / map->height;
 
     for (int y = 0; y < map->height; y++) {
         for (int x = 0; x < map->width; x++) {
             if (map->cells[y][x] == 1) {
                 DrawRectangle(
-                    x * cellsize_x,
-                    y * cellsize_y,
-                    cellsize_x,
-                    cellsize_y,
+                    map_to_minimap_x(x, mm),
+                    map_to_minimap_y(y, mm),
+                    mm.w,
+                    mm.h,
                     DARKGRAY
                 );
             }

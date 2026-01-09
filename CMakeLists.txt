@@ -116,7 +116,8 @@ target_include_directories(drawing_functions
 )
 
 target_link_libraries(drawing_functions
- ${raylib_LIBRARIES}
+  ${raylib_LIBRARIES}
+  scaling
 )
 
 set(RAYCASTER_VIDEO_CAPTURE_SRC
