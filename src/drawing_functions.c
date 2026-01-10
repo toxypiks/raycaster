@@ -4,18 +4,22 @@
 
 void draw_minimap(RaycastMap *map, int minimap_width, int minimap_height)
 {
-    MinimapTileSize mm;
-    mm.w = (float)minimap_width / map->width;
-    mm.h = (float)minimap_height / map->height;
+    ScaleFactor sf_minimap = {
+        .scale_x = (float)minimap_width / map->width,
+        .scale_y = (float)minimap_height / map->height,
+        .offset_x = 0,
+        .offset_y = 0
+    };
 
     for (int y = 0; y < map->height; y++) {
         for (int x = 0; x < map->width; x++) {
             if (map->cells[y][x] == 1) {
+                Point p_mm = scaling((Point){.x=x,.y=y},sf_minimap);
                 DrawRectangle(
-                    map_to_minimap_x(x, mm),
-                    map_to_minimap_y(y, mm),
-                    mm.w,
-                    mm.h,
+                    p_mm.x,
+                    p_mm.y,
+                    sf_minimap.scale_x,
+                    sf_minimap.scale_y,
                     DARKGRAY
                 );
             }

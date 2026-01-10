@@ -1,34 +1,10 @@
 #include "scaling.h"
 
-/* world -> map */
-int world_to_map_x(float world_x, TileSize tile)
+Point scaling (Point p_in, ScaleFactor sf)
 {
-    return (int)(world_x / tile.w);
-}
+    Point p_out = {0};
+    p_out.x = p_in.x * sf.scale_x + sf.offset_x;
+    p_out.y = p_in.y * sf.scale_y + sf.offset_y;
 
-int world_to_map_y(float world_y, TileSize tile)
-{
-    return (int)(world_y / tile.h);
-}
-
-/* map -> world (e.g. Tile center) */
-float map_to_world_x(int map_x, TileSize tile)
-{
-    return map_x * tile.w + tile.w * 0.5f;
-}
-
-float map_to_world_y(int map_y, TileSize tile)
-{
-    return map_y * tile.h + tile.h * 0.5f;
-}
-
-/* map -> minimap */
-float map_to_minimap_x(int map_x, MinimapTileSize tile)
-{
-    return map_x * tile.w;
-}
-
-float map_to_minimap_y(int map_y, MinimapTileSize tile)
-{
-    return map_y * tile.h;
+    return p_out;
 }
