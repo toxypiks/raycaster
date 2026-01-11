@@ -6,13 +6,13 @@ typedef struct {
     float scale_y;
     float offset_x;
     float offset_y;
-} ScaleFactor;
+} Scale;
 
 typedef struct {
     float x;
     float y;
 } Point;
 
-Point scaling(Point p_in, ScaleFactor sf);
+Point scaling(Point p_in, Scale s);
 
 #endif // SCALING_H_
