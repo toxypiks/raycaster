@@ -40,20 +40,20 @@ void draw_player_on_mini_window(Player *p, int mini_window_width, int mini_windo
     DrawCircle(player_pos.x, player_pos.y, 5, GREEN);
 }
 
-// TODO scaling factor/working with normalized values
 void draw_rays_on_mini_window(RaycastRay rays[], int num_rays, Player *p, RaycastMap *map, int mini_window_width, int mini_window_height, int width, int height)
 {
-    float cell_w = (float)mini_window_width / map->width;
-    float cell_h = (float)mini_window_height / map->height;
+    Scale s = {
+        .scale_x = ((float)mini_window_width)/((float)width),
+        .scale_y = ((float)mini_window_height)/((float)height),
+        .offset_x = 0,
+        .offset_y = 0
+    };
 
-    float player_map_x = (p->x / width) * mini_window_width;
-    float player_map_y = (p->y / height) * mini_window_height;
+    Point player_pos = scaling((Point){.x=p->x, .y= p->y}, s);
 
     for (int r = 0; r < num_rays; r++) {
-        int px = (int)(rays[r].x / width * mini_window_width);
-        int py = (int)(rays[r].y / height * mini_window_height);
-
-        DrawLine((int)player_map_x, (int)player_map_y, px, py, GREEN);
+        Point ray_pos = scaling((Point){.x=rays[r].x, .y=rays[r].y}, s);
+        DrawLine((int)player_pos.x, (int)player_pos.y, (int)ray_pos.x, (int)ray_pos.y, GREEN);
     }
 }
 
