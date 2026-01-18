@@ -58,22 +58,19 @@ void draw_rays_on_mini_window(RaycastRay rays[], int num_rays, Player *p, Raycas
 }
 
 void draw_first_person_view(RaycastRay rays[], int num_rays,
-                            int screen_width, int screen_height,
-                            int mini_window_width, int player_view_width)
+                            int player_view_width, int width, int height)
 {
     // calc ray width by dividing screen width by number of rays
-    int ray_width = player_view_width / num_rays;
+    int rect_width = player_view_width / num_rays;
 
     for (int r = 0; r < num_rays; r++) {
         float dist = rays[r].dist;
 
-        // calc hight of wall (inversely proportional)
-        // the closer the wall the bigger line_height -> the smaller distance the bigger line_height
-        int line_height = (int)(screen_height / dist * 50); // 50 = scalingfactor randomly chosen, test
-        int line_top = (screen_height - line_height) / 2;
+        int rect_height = (int)(height / dist * 50); // 50 = scalingfactor randomly chosen, test
+        int rect_top = (height - rect_height) / 2;
 
         // x-position of line in window
-        int screen_x = mini_window_width + r * ray_width;
+        int screen_x = width + r * rect_width;
 
         // dim color relating to distance (closer = brighter)
         int shade = (int)(255.0f / (dist + 1.0f) * 50); // randomly chosen, test
@@ -82,6 +79,6 @@ void draw_first_person_view(RaycastRay rays[], int num_rays,
 
         Color wall_color = (Color){shade, shade, shade, 255};
 
-        DrawRectangle(screen_x, line_top, ray_width, line_height, wall_color);
+        DrawRectangle(screen_x, rect_top, rect_width, rect_height, wall_color);
     }
 }

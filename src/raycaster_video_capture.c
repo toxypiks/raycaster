@@ -69,6 +69,7 @@ int main ()
     close(pipefd[READ_END]);
 
     const int mini_window_width = WIDTH / 2;
+    const int mini_window_height = HEIGHT;
     const int player_view_width = WIDTH / 2;
 
     int num_rays = 100;
@@ -148,7 +149,7 @@ int main ()
 
         cast_rays(map, &player, num_rays, rays, WIDTH, HEIGHT);
 
-        draw_first_person_view(rays, num_rays, WIDTH, HEIGHT, mini_window_width, player_view_width);
+        draw_first_person_view(rays, num_rays, player_view_width, mini_window_width, mini_window_height);
 
         draw_rays_on_mini_window(rays, num_rays, &player, map, mini_window_width, HEIGHT, WIDTH, HEIGHT);
 
