@@ -1,4 +1,5 @@
 #include "raycastray.h"
+#include "scaling.h"
 
 void cast_rays(RaycastMap *map, Player *p, int num_rays, RaycastRay rays[], int screen_width, int screen_height)
 {
@@ -26,9 +27,17 @@ void cast_rays(RaycastMap *map, Player *p, int num_rays, RaycastRay rays[], int 
             ray_x += ray_dir_x * step;
             ray_y += ray_dir_y * step;
 
+            Scale s_pixel_to_map = {
+                .scale_x = (float)map->width / screen_width,
+                .scale_y = (float)map->height / screen_height,
+                .offset_x = 0,
+                .offset_y = 0
+            };
+
             // scale pixel to map
-            int mx = (int)(ray_x / (screen_width / map->width));
-            int my = (int)(ray_y / (screen_height / map->height));
+            Point p_map = scaling((Point){.x=ray_x,.y=ray_y},s_pixel_to_map);
+            int mx = (int)(p_map.x);
+            int my = (int)(p_map.y);
 
             // stop if out of bounds map
             if (mx < 0 || mx >= map->width || my < 0 || my >= map->height)
